@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Clock, BarChart3, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AssessmentCTA: React.FC = () => {
   return (
@@ -37,10 +38,10 @@ const AssessmentCTA: React.FC = () => {
 
           {/* Right CTA */}
           <div className="flex flex-col items-center lg:items-end gap-4">
-            <a href="/onboarding" className="btn btn-primary btn-xl group w-full lg:w-auto">
+            <Link to="/onboarding" className="btn btn-primary btn-xl group w-full lg:w-auto">
               <span>Start Your Assessment</span>
               <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+            </Link>
             <div className="text-white/70 text-sm font-medium text-center lg:text-right">
               Free assessment • No registration required
             </div>
