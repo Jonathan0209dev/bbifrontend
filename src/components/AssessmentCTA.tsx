@@ -37,10 +37,10 @@ const AssessmentCTA: React.FC = () => {
 
           {/* Right CTA */}
           <div className="flex flex-col items-center lg:items-end gap-4">
-            <button className="btn btn-primary btn-xl group w-full lg:w-auto">
+            <a href="/onboarding" className="btn btn-primary btn-xl group w-full lg:w-auto">
               <span>Start Your Assessment</span>
               <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            </a>
             <div className="text-white/70 text-sm font-medium text-center lg:text-right">
               Free assessment • No registration required
             </div>

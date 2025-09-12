@@ -234,7 +234,8 @@ const Hero: React.FC = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button 
+              <a 
+                href="/onboarding"
                 className="inline-flex items-center justify-center font-roboto-slab font-semibold transition-all hover:shadow-lg group"
                 style={{
                   width: '266px',
@@ -257,7 +258,7 @@ const Hero: React.FC = () => {
               >
                 <span>Start Your Assessment</span>
                 <span className="text-xl font-bold group-hover:translate-x-1 transition-transform">▶</span>
-              </button>
+              </a>
               <button 
                 className="relative inline-flex items-center justify-center font-roboto-slab font-semibold transition-all hover:shadow-lg"
                 style={{
