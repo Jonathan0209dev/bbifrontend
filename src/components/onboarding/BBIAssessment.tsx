@@ -91,14 +91,22 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
 
   const getCurrentSectionProgress = () => {
     const section = sections[currentSection];
-    const currentData = sectionData[section.id as keyof typeof sectionData];
+    const sectionId = section.id;
     
-    if (Array.isArray(currentData)) {
-      return currentData.length;
-    } else if (typeof currentData === 'object') {
-      return Object.keys(currentData).length;
+    switch (sectionId) {
+      case 'hexaco':
+        return Object.keys(sectionData.hexaco).length;
+      case 'csi':
+        return Object.keys(sectionData.csi).length;
+      case 'icar':
+        return sectionData.icar.length;
+      case 'aq10':
+        return sectionData.aq10.length;
+      case 'asrs':
+        return sectionData.asrs.length;
+      default:
+        return 0;
     }
-    return 0;
   };
 
   const isCurrentSectionComplete = () => {
@@ -155,7 +163,23 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
         {/* Assessment Content */}
         <div className="p-8">
           <CurrentSectionComponent
-            data={sectionData[sections[currentSection].id as keyof typeof sectionData]}
+            data={(() => {
+              const sectionId = sections[currentSection].id;
+              switch (sectionId) {
+                case 'hexaco':
+                  return sectionData.hexaco;
+                case 'csi':
+                  return sectionData.csi;
+                case 'icar':
+                  return sectionData.icar;
+                case 'aq10':
+                  return sectionData.aq10;
+                case 'asrs':
+                  return sectionData.asrs;
+                default:
+                  return {};
+              }
+            })()}
             onUpdate={(newData: any) => updateSectionData(sections[currentSection].id, newData)}
           />
         </div>
