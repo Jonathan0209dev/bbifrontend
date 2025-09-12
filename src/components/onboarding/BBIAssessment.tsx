@@ -30,7 +30,6 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
       title: 'Personality Assessment',
       description: 'Understanding your personality traits and tendencies',
       icon: <Brain size={24} />,
-      component: HEXACOSection,
       totalQuestions: 24
     },
     {
@@ -38,7 +37,6 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
       title: 'Communication Style',
       description: 'How you prefer to communicate and express yourself',
       icon: <MessageSquare size={24} />,
-      component: CSISection,
       totalQuestions: 16
     },
     {
@@ -46,7 +44,6 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
       title: 'Cognitive Assessment',
       description: 'Evaluating reasoning and problem-solving abilities',
       icon: <Brain size={24} />,
-      component: ICARSection,
       totalQuestions: 10
     },
     {
@@ -54,7 +51,6 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
       title: 'Autism Spectrum Assessment',
       description: 'Understanding cognitive patterns and preferences',
       icon: <CheckCircle size={24} />,
-      component: AQ10Section,
       totalQuestions: 10
     },
     {
@@ -62,7 +58,6 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
       title: 'ADHD Assessment',
       description: 'Evaluating attention and focus patterns',
       icon: <CheckCircle size={24} />,
-      component: ASRSSection,
       totalQuestions: 18
     }
   ];
@@ -115,8 +110,6 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
     return progress >= section.totalQuestions;
   };
 
-  const CurrentSectionComponent = sections[currentSection].component;
-
   return (
     <div className="max-w-4xl mx-auto px-6">
       <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
@@ -162,26 +155,36 @@ const BBIAssessment: React.FC<BBIAssessmentProps> = ({ data, onUpdate, onNext, o
 
         {/* Assessment Content */}
         <div className="p-8">
-          <CurrentSectionComponent
-            data={(() => {
-              const sectionId = sections[currentSection].id;
-              switch (sectionId) {
-                case 'hexaco':
-                  return sectionData.hexaco;
-                case 'csi':
-                  return sectionData.csi;
-                case 'icar':
-                  return sectionData.icar;
-                case 'aq10':
-                  return sectionData.aq10;
-                case 'asrs':
-                  return sectionData.asrs;
-                default:
-                  return {};
-              }
-            })()}
-            onUpdate={(newData: any) => updateSectionData(sections[currentSection].id, newData)}
-          />
+          {currentSection === 0 && (
+            <HEXACOSection
+              data={sectionData.hexaco}
+              onUpdate={(newData: { [key: string]: number }) => updateSectionData('hexaco', newData)}
+            />
+          )}
+          {currentSection === 1 && (
+            <CSISection
+              data={sectionData.csi}
+              onUpdate={(newData: { [key: string]: number }) => updateSectionData('csi', newData)}
+            />
+          )}
+          {currentSection === 2 && (
+            <ICARSection
+              data={sectionData.icar}
+              onUpdate={(newData: any[]) => updateSectionData('icar', newData)}
+            />
+          )}
+          {currentSection === 3 && (
+            <AQ10Section
+              data={sectionData.aq10}
+              onUpdate={(newData: any[]) => updateSectionData('aq10', newData)}
+            />
+          )}
+          {currentSection === 4 && (
+            <ASRSSection
+              data={sectionData.asrs}
+              onUpdate={(newData: any[]) => updateSectionData('asrs', newData)}
+            />
+          )}
         </div>
 
         {/* Navigation */}
